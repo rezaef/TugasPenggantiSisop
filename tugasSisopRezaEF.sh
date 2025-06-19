@@ -87,9 +87,24 @@ function menu_waktu_saat_ini() {
     clear
     loading_spinner
 
+    # Ambil jam sekarang dalam format 24-jam
+    HOUR=$(TZ='Asia/Jakarta' date +%H)
+    if [ "$HOUR" -ge 4 ] && [ "$HOUR" -lt 11 ]; then
+        GREETING="Selamat pagi"
+    elif [ "$HOUR" -ge 11 ] && [ "$HOUR" -lt 15 ]; then
+        GREETING="Selamat siang"
+    elif [ "$HOUR" -ge 15 ] && [ "$HOUR" -lt 18 ]; then
+        GREETING="Selamat sore"
+    else
+        GREETING="Selamat malam"
+    fi
+
     echo -e "${YELLOW}╔══════════════════════════════════════════════════╗${NC}"
     echo -e "${YELLOW}║           ${CYAN}INFORMASI WAKTU SAAT INI (WIB)         ${YELLOW}║${NC}"
     echo -e "${YELLOW}╚══════════════════════════════════════════════════╝${NC}"
+
+    echo -e "${CYAN}$GREETING, $USER!${NC}"
+    echo
 
     echo -e "${CYAN}Tanggal dan Waktu:${NC}"
     echo -e "  📅 Hari    : $(TZ='Asia/Jakarta' date '+%A')"
@@ -100,6 +115,7 @@ function menu_waktu_saat_ini() {
     echo -e "${YELLOW}────────────────────────────────────────────────────${NC}"
     read -p "Tekan Enter untuk kembali ke menu utama..."
 }
+
 
 
 # Menu 2: Isi Direktori
@@ -264,7 +280,7 @@ function menu_user_info() {
 function menu_keluar() {
     clear
     echo -e "${YELLOW}╔══════════════════════════════════════════════════════╗${NC}"
-    echo -e "${YELLOW}║            ${CYAN}👋 TERIMA KASIH TELAH MENGGUNAKAN${NC}         ${YELLOW}║${NC}"
+    echo -e "${YELLOW}║            ${CYAN}TERIMA KASIH TELAH MENGGUNAKAN${NC}            ${YELLOW}║${NC}"
     echo -e "${YELLOW}║              ${CYAN}PROGRAM TUGAS SISOP FIRMAN${NC}              ${YELLOW}║${NC}"
     echo -e "${YELLOW}╚══════════════════════════════════════════════════════╝${NC}"
     echo 
